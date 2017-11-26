@@ -1,0 +1,43 @@
+
+Goal: Write code that slices an image into square pieces, performs the fft on the image, then stiches the pieces back together into a new composite image
+
+
+Steps:
+
+1. Load the image using cv2.imread('...', 0) for grayscale
+    - The image would preferably be itself square, but not necessarily
+
+2. Slice up the image into square regions
+    - Create a null array (chunks) to put the new images in (numpy array)
+    - Determine the shape of the image (img.shape[0],img.shape[1])
+    - Select a chunk size that fits evenly into the image (this is where being careful about the shape 
+      of the input image becomes important)
+        --For now, just set this based on the motion_bike.jpg image
+    - Loop through the image
+        -- Start at [0,0], create square region of H(eight) X W(idth)
+        -- Step the cursor to [0,W], create another region
+        -- Continue until n*W > img.shape[1]
+        -- Set cursor to [H,0], start looping through columns again
+
+3. During each loop, perform the 2Dfft on the image taken from img
+
+4. Process the dft
+    - dftshift
+    - log of dft
+
+5. Store the dft into chunks[i]
+
+
+c = 450
+r = 10
+
+m=1
+n=0
+
+Row 1 = newrow[0:10,0:450]      or      newrow[0:r,n*(c+1):n*(c+1)+c]
+
+n+=1
+
+Row 2 = newrow[0:10,451:901     or      newrow[0:r,
+
+Row 3 = newrow[0:10,902:1352
